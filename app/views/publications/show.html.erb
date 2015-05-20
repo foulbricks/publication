@@ -1,0 +1,36 @@
+<div class="row">
+	<div class="col-sm-12">
+		<h2><%= @publication.name %></h2>
+		<hr />
+		<div class="row">
+			<% if @publication.pub_image.present? %>
+				<div class="col-sm-4">
+					<div>
+						<img src="<%= @publication.pub_image.url %>" alt=""/>
+					</div>
+				</div>
+			<% end %>
+			<% column_size = @publication.pub_image.present? ? "col-sm-8" : "col-sm-12" %>
+			<div class="<%= column_size %>">
+				<h3><%= @publication.headline %></h3>
+				<% if @publication.pub_date.present? %>
+					<p><%= @publication.pub_date.to_formatted_s(:long) %></p>
+				<% end %>
+				<p><%= @publication.description_text %></p>
+			</div>
+		</div>
+		<% if @publication.people.size > 0 %>
+			<div class="row">
+				<div class="col-sm-12">
+					<h4>People in this Publication</h4>
+					<hr />
+					<% @publication.people.each do |person| %>
+						<div class="col-sm-6">
+							<p><%= link_to person.name, person_path(person) %></p>
+						</div>
+					<% end %>
+				</div>
+			</div>
+		<% end %>
+	</div>
+</div>

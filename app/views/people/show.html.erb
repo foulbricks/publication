@@ -1,0 +1,35 @@
+<div class="row">
+	<div class="col-sm-12">
+		<h2><%= @person.name %></h2>
+		<hr />
+		<div class="row">
+			<% if @person.photo.present? %>
+				<div class="col-sm-4">
+					<div>
+						<img src="<%= @person.photo.url %>" alt=""/>
+					</div>
+				</div>
+			<% end %>
+			<% column_size = @person.photo.present? ? "col-sm-8" : "col-sm-12" %>
+			<div class="<%= column_size %>">
+				<% if @person.job_title.present? %>
+					<h3><%= @person.job_title %></h3>
+				<% end %>
+				<p><%= @person.bio %></p>
+			</div>
+		</div>
+		<% if @person.publications.size > 0 %>
+			<div class="row">
+				<div class="col-sm-12">
+					<h4>Publications by <%= @person.name %></h4>
+					<hr />
+					<% @person.publications.each do |publication| %>
+						<div class="col-sm-6">
+							<p><%= link_to publication.name, publication_path(publication) %></p>
+						</div>
+					<% end %>
+				</div>
+			</div>
+		<% end %>
+	</div>
+</div>
